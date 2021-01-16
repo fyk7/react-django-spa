@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'corsheaders',
-    'financialinfo',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +142,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-AUTH_USER_MODEL = 'financialinfo.User'
+AUTH_USER_MODEL = 'api.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 

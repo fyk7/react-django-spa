@@ -57,7 +57,7 @@ class Profile(models.Model):
 
 
 class FinancialNews(models.Model):
-    publisher = models.Choices(choices=((1, "Bloomberg"), (2, "Roeuter")))
+    publisher = models.IntegerField(choices=((1, "Bloomberg"), (2, "Roeuter")))
     title = models.CharField(max_length=100)
     detail = models.CharField(max_length=1000)
     detail_url = models.CharField(max_length=200)

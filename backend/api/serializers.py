@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers, generics
-from .models import Profile
+from .models import Profile, FinancialNews
 
 
 class UserSerializer(serializers.ModelSerializer):
