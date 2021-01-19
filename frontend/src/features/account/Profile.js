@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
 import {
   Avatar,
   Box,
@@ -16,11 +15,8 @@ import {
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
-  city: 'Los Angeles',
-  country: 'USA',
   jobTitle: 'Senior Developer',
   name: 'react-django-spa',
-  timezone: 'GTM-7'
 };
 
 const useStyles = makeStyles(() => ({
@@ -55,19 +51,6 @@ const Profile = ({ className, ...rest }) => {
             variant="h3"
           >
             {user.name}
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body1"
-          >
-            {`${user.city} ${user.country}`}
-          </Typography>
-          <Typography
-            className={classes.dateText}
-            color="textSecondary"
-            variant="body1"
-          >
-            {`${moment().format('hh:mm A')} ${user.timezone}`}
           </Typography>
         </Box>
       </CardContent>
