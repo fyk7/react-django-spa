@@ -13,6 +13,7 @@ import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
 import TotalProfit from './TotalProfit';
 import TrafficByDevice from './TrafficByDevice';
+import ApexTest from './ApexTest';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ const Dashboard = () => {
           container
           spacing={3}
         >
-          <Grid
+          {/* <Grid
             item
             lg={3}
             sm={6}
@@ -71,7 +72,7 @@ const Dashboard = () => {
             xs={12}
           >
             <TotalProfit />
-          </Grid>
+          </Grid> */}
           <Grid
             item
             lg={8}
@@ -107,6 +108,15 @@ const Dashboard = () => {
             xs={12}
           >
             <LatestOrders />
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xl={6}
+            xs={12}
+          >
+            <ApexTest />
           </Grid>
         </Grid>
       </Container>
