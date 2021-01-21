@@ -72,4 +72,5 @@ class FinancialNews(models.Model):
         ]
 
     def __str__(self):
-        return self.publisher + self.title
+        publisher_dict = {1: 'Bloomberg', 2: 'Roeuters'}
+        return publisher_dict[self.publisher] + '_' + self.title
