@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 import {
   AppBar,
   Toolbar,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
 import Logo from 'src/components/Logo';
 
 const useStyles = makeStyles(({
@@ -15,6 +17,12 @@ const useStyles = makeStyles(({
     height: 64
   }
 }));
+
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF"
+  }
+})(Typography);
 
 const TopBar = ({ className, ...rest }) => {
   const classes = useStyles();
@@ -27,7 +35,10 @@ const TopBar = ({ className, ...rest }) => {
     >
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
-          <Logo />
+          {/* <Logo /> */}
+          <WhiteTextTypography variant="h3">
+            React Django SPA
+          </WhiteTextTypography>
         </RouterLink>
       </Toolbar>
     </AppBar>

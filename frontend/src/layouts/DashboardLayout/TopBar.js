@@ -10,8 +10,10 @@ import {
   Hidden,
   IconButton,
   Toolbar,
-  makeStyles
+  makeStyles,
+  Typography
 } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
@@ -43,6 +45,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF"
+  }
+})(Typography);
+
 const TopBar = ({
   className,
   onMobileNavOpen,
@@ -62,7 +70,10 @@ const TopBar = ({
     >
       <Toolbar>
         <RouterLink to="/">
-          <Logo />
+          {/* <Logo /> */}
+          <WhiteTextTypography variant="h3">
+            React Django SPA
+          </WhiteTextTypography>
         </RouterLink>
         <Box flexGrow={1} />
         <Hidden mdDown>
