@@ -27,7 +27,7 @@ const Sales = ({ className, ...rest }) => {
   const data = {
     datasets: [
       {
-        backgroundColor: colors.indigo[500],
+        backgroundColor: colors.teal[400],
         data: [18, 5, 19, 27, 29, 19, 20],
         label: 'This year'
       },

@@ -32,9 +32,9 @@ const TrafficByDevice = ({ className, ...rest }) => {
       {
         data: [63, 15, 22],
         backgroundColor: [
-          colors.indigo[500],
-          colors.red[600],
-          colors.orange[600]
+          colors.teal[400],
+          colors.red[300],
+          colors.orange[300]
         ],
         borderWidth: 8,
         borderColor: colors.common.white,
@@ -71,19 +71,19 @@ const TrafficByDevice = ({ className, ...rest }) => {
       title: 'Desktop',
       value: 63,
       icon: LaptopMacIcon,
-      color: colors.indigo[500]
+      color: colors.teal[400]
     },
     {
       title: 'Tablet',
       value: 15,
       icon: TabletIcon,
-      color: colors.red[600]
+      color: colors.red[300]
     },
     {
       title: 'Mobile',
       value: 23,
       icon: PhoneIcon,
-      color: colors.orange[600]
+      color: colors.orange[400]
     }
   ];
 
