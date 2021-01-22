@@ -34,6 +34,7 @@ import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   fetchAsyncCreateProf,
+  resetLoggedIn,
 } from "../../features/auth/authSlice";
 
 
@@ -92,6 +93,7 @@ const TopBar = ({
             localStorage.removeItem("localJWT");
             // dispatch(editNickname(""));
             // dispatch(resetOpenProfile());
+            dispatch(resetLoggedIn())
             navigate('/login/', { replace: true });
            }}
           >

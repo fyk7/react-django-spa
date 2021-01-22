@@ -11,10 +11,11 @@ import ProductListView from 'src/features/fianncialnews';
 import RegisterView from 'src/features/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 
-const routes = [
+const routes = (isLoggedin) => [
   {
     path: 'app',
-    element: <DashboardLayout />,
+    element: isLoggedin ? <DashboardLayout /> : <Navigate to="/login"/>,
+    // element: <DashboardLayout />,
     children: [
       { path: 'account', element: <AccountView /> },
       // { path: 'customers', element: <CustomerListView /> },
@@ -26,12 +27,13 @@ const routes = [
   },
   {
     path: '/',
-    element: <MainLayout />,
+    element: !isLoggedin ? <MainLayout /> : <Navigate to="/app/dashboard"/>,
+    // element: false ? <MainLayout /> : <Navigate to="/app/dashboard"/>,
     children: [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
+      { path: '/', element: <Navigate to="/login" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

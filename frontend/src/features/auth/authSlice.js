@@ -85,6 +85,7 @@ export const authSlice = createSlice({
   initialState: {
     // openSignIn: true,
     // openSignUp: false,
+    isLoggedIn: false,
     openProfile: false,
     isLoadingAuth: false,
     myprofile: {
@@ -110,6 +111,12 @@ export const authSlice = createSlice({
     },
     fetchCredEnd(state) {
       state.isLoadingAuth = false;
+    },
+    setLoggedIn(state) {
+      state.isLoggedIn = true;
+    },
+    resetLoggedIn(state) {
+      state.isLoggedIn = false;
     },
     // setOpenSignIn(state) {
     //   state.openSignIn = true;
@@ -162,6 +169,8 @@ export const {
   // resetOpenSignIn,
   // setOpenSignUp,
   // resetOpenSignUp,
+  setLoggedIn,
+  resetLoggedIn,
   setOpenProfile,
   resetOpenProfile,
   editNickname,
@@ -171,6 +180,7 @@ export const selectIsLoadingAuth = (state) =>
   state.auth.isLoadingAuth;
 // export const selectOpenSignIn = (state) => state.auth.openSignIn;
 // export const selectOpenSignUp = (state) => state.auth.openSignUp;
+export const selectLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectOpenProfile = (state) => state.auth.openProfile;
 export const selectProfile = (state) => state.auth.myprofile;
 export const selectProfiles = (state) => state.auth.profiles;

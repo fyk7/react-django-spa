@@ -31,6 +31,7 @@ import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   fetchAsyncCreateProf,
+  setLoggedIn,
 } from "./authSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,6 +81,7 @@ const LoginView = () => {
                 // await dispatch(fetchAsyncGetPosts());
                 // await dispatch(fetchAsyncGetComments());
                 await dispatch(fetchAsyncGetMyProf());
+                await dispatch(setLoggedIn())
               }
               await dispatch(fetchCredEnd());
               // await dispatch(resetOpenSignIn());

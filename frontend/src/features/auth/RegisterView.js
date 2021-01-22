@@ -32,6 +32,7 @@ import {
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   fetchAsyncCreateProf,
+  setLoggedIn,
 } from "./authSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +99,7 @@ const RegisterView = () => {
                 // await dispatch(fetchAsyncGetPosts());
                 // await dispatch(fetchAsyncGetComments());
                 await dispatch(fetchAsyncGetMyProf());
+                await dispatch(setLoggedIn())
               }
               await dispatch(fetchCredEnd());
               navigate('/app/dashboard', { replace: true });
