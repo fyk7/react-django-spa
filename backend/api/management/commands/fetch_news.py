@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 from ...models import FinancialNews
-from ..utils import bloomberg  # , reuters
+from ..news_utils import bloomberg  # , reuters
 ROEUTER_URL = "https://jp.reuters.com/"
 
 
