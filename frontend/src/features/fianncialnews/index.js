@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import {
   Box,
@@ -8,15 +8,10 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import ProductCard from './ProductCard';
-// import data from './data';
 import {
-  fetchNewsStart,
-  fetchNewsEnd,
-  selectIsLoadingNews,
   fetchAsyncGetNews,
   selectNews
 } from "./financialnewsSlice"
-import { selectIsLoadingAuth } from '../auth/authSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,34 +27,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductList = () => {
   const classes = useStyles();
-  // const [products] = useState(data);
-  // const products = useSelector(selectNews);
-  //仮データ
-  const products = [
-    {publisher: 'Bloomberg', title: 'bloomberg_title', detail:'bloomberg_detail'},
-    {publisher: 'Reuters', title: 'reuters_title', detail:'reuters_detail'},
-  ]
-  const isLoadingNews = useSelector(selectIsLoadingAuth);
+  const products = useSelector(selectNews);
   const dispatch = useDispatch();
-  // productsはuseSelectoerを用いて、storeからとってくる
-  // useEffect(() => {
-  //   const fetchBootLoader = async () => {
-  //     if (localStorage.localJWT) {
-  //       // dispatch(resetOpenSignIn());
-  //       // const result = await dispatch(fetchAsyncGetMyProf());
-  //       // if (fetchAsyncGetMyProf.rejected.match(result)) {
-  //       //   dispatch(setOpenSignIn());
-  //       //   return null;
-  //       // }
-  //       await dispatch(fetchAsyncGetNews());
-  //       // await dispatch(fetchAsyncGetProfs());
-  //       // await dispatch(fetchAsyncGetComments());
-  //     }
-  //   };
-  //   //useeffectはprefetch的な役割をになっている? 
-  //   //dispatchが呼ばれたときだけ実行される
-  //   fetchBootLoader();
-  // }, [dispatch]);
+  useEffect(() => {
+    const fetchBootLoader = async () => {
+      if (localStorage.localJWT) {
+        await dispatch(fetchAsyncGetNews());
+      }
+    };
+    fetchBootLoader();
+  }, []);
 
   return (
     <Page
@@ -80,7 +57,7 @@ const ProductList = () => {
             >
               <ProductCard
                 className={classes.productCard}
-                products={products.filter(product => product.publisher === 'Bloomberg')}
+                products={products.filter(product => product.publisher === 1)}
                 publisher='Bloomberg'
                 media='/static/images/avatars/bloomberg_image.png'
               />
@@ -93,7 +70,7 @@ const ProductList = () => {
             >
               <ProductCard
                 className={classes.productCard}
-                products={products.filter(product => product.publisher === 'Reuters')}
+                products={products.filter(product => product.publisher === 2)}
                 publisher='Reuters'
                 media='/static/images/avatars/Reuters_logo_300.png'
               />

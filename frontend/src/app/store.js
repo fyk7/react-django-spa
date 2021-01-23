@@ -1,11 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import authReducer from "../features/auth/authSlice";
-// import postReducer from "../features/post/postSlice";
+import newsReducer from "../features/fianncialnews/financialnewsSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    // post: postReducer,
+    // redux dev toolで stateの名称になるため非常に重要
+    news: newsReducer,
   },
 });
 
