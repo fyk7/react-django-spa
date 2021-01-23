@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny
 from . import serializers
 from .models import Profile, FinancialNews
 from .serializers import NewsSerializer
+from datetime import date
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -28,11 +29,11 @@ class MyProfileListView(generics.ListAPIView):
 
 
 # TODO memcacheを用いて配信する。
-# TODO article_timestamp or createdがある時刻以降のニュースに絞る
 class NewsListView(generics.ListAPIView):
     queryset = FinancialNews.objects.all()
     serializer_class = NewsSerializer
 
     def get_queryset(self):
-        queryset = FinancialNews.objects.filter()
+        queryset = FinancialNews.objects.filter(
+            article_timestamp__gte=date.today()).order_by('-article_timestamp')
         return queryset

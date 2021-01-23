@@ -14,6 +14,7 @@ def prep_text(text):
     text = re.sub(r'原題.*(抜粋)', '', text)
     text = re.sub(r'Photographer:.*', '', text)
     text = re.sub(r'Source:.*', '', text)
+    text = text.strip()
     return text
 
 
@@ -24,7 +25,6 @@ def fetch_news():
     soup = BeautifulSoup(res.text, 'html.parser')
 
     for a in soup.select("#hub_story_list_2 div article div div.story-list-story__info__headline a"):
-        # print(a.text)
         news_dict = {}
         news_dict['publisher'] = 1
         news_dict['title'] = a.text
@@ -34,8 +34,8 @@ def fetch_news():
         time.sleep(0.5)
         soup = BeautifulSoup(res.text, 'html.parser')
         news_dict['detail'] = ''.join([prep_text(c.text) for c in soup.select(
-            "article div.content-well section div.body-columns div p")])
+            "article div.content-well section div.body-columns div p")])[:980] + '...'
         news_dict['article_timestamp'] = soup.select(
-            "article div.content-well section div.body-columns div p").text
+            "body > main > div.transporter-item.current > article > div.lede-text-only.lede > div > div > div > time")[0]["datetime"]
         news_list.append(news_dict)
     return news_list
