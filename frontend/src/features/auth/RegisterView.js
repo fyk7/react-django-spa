@@ -7,9 +7,7 @@ import { Formik } from 'formik';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
   Typography,
@@ -19,12 +17,6 @@ import {
 import Page from 'src/components/Page';
 import {
   selectIsLoadingAuth,
-  // selectOpenSignIn,
-  // selectOpenSignUp,
-  // setOpenSignIn,
-  // resetOpenSignIn,
-  // setOpenSignUp,
-  // resetOpenSignUp,
   fetchCredStart,
   fetchCredEnd,
   fetchAsyncLogin,
@@ -47,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
 const RegisterView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  // const openSignIn = useSelector(selectOpenSignIn);
-  // const openSignUp = useSelector(selectOpenSignUp);
   const isLoadingAuth = useSelector(selectIsLoadingAuth);
   const dispatch = useDispatch();
 
@@ -84,9 +74,6 @@ const RegisterView = () => {
                 // policy: Yup.boolean().oneOf([true], 'This field must be checked')
               })
             }
-            // onSubmit={() => {
-            //   navigate('/app/dashboard', { replace: true });
-            // }}
             onSubmit={async (values) => {
               await dispatch(fetchCredStart());
               const resultReg = await dispatch(fetchAsyncRegister(values));
@@ -96,14 +83,11 @@ const RegisterView = () => {
                 await dispatch(fetchAsyncCreateProf({ nickName: "anonymous" }));
   
                 await dispatch(fetchAsyncGetProfs());
-                // await dispatch(fetchAsyncGetPosts());
-                // await dispatch(fetchAsyncGetComments());
                 await dispatch(fetchAsyncGetMyProf());
                 await dispatch(setLoggedIn())
               }
               await dispatch(fetchCredEnd());
               navigate('/app/dashboard', { replace: true });
-              // await dispatch(resetOpenSignUp());
             }}
           >
             {({
@@ -131,30 +115,6 @@ const RegisterView = () => {
                     Use your email to create new account
                   </Typography>
                 </Box>
-                {/* <TextField
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  fullWidth
-                  helperText={touched.firstName && errors.firstName}
-                  label="First name"
-                  margin="normal"
-                  name="firstName"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
-                  variant="outlined"
-                />
-                <TextField
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  fullWidth
-                  helperText={touched.lastName && errors.lastName}
-                  label="Last name"
-                  margin="normal"
-                  name="lastName"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  variant="outlined"
-                /> */}
                 <TextField
                   error={Boolean(touched.email && errors.email)}
                   fullWidth
@@ -181,38 +141,6 @@ const RegisterView = () => {
                   value={values.password}
                   variant="outlined"
                 />
-                {/* <Box
-                  alignItems="center"
-                  display="flex"
-                  ml={-1}
-                >
-                  <Checkbox
-                    checked={values.policy}
-                    name="policy"
-                    onChange={handleChange}
-                  />
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </Box> */}
-                {/* {Boolean(touched.policy && errors.policy) && (
-                  <FormHelperText error>
-                    {errors.policy}
-                  </FormHelperText>
-                )} */}
                 <Box my={2}>
                   <Button
                     color="primary"

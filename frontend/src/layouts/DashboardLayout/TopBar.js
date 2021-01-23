@@ -20,17 +20,9 @@ import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
 import {
   selectIsLoadingAuth,
-  // selectOpenSignIn,
-  // selectOpenSignUp,
-  // setOpenSignIn,
-  // resetOpenSignIn,
-  // setOpenSignUp,
-  // resetOpenSignUp,
   resetOpenProfile,
   fetchCredStart,
   fetchCredEnd,
-  fetchAsyncLogin,
-  fetchAsyncRegister,
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   fetchAsyncCreateProf,

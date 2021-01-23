@@ -118,24 +118,6 @@ export const authSlice = createSlice({
     resetLoggedIn(state) {
       state.isLoggedIn = false;
     },
-    // setOpenSignIn(state) {
-    //   state.openSignIn = true;
-    // },
-    // resetOpenSignIn(state) {
-    //   state.openSignIn = false;
-    // },
-    // setOpenSignUp(state) {
-    //   state.openSignUp = true;
-    // },
-    // resetOpenSignUp(state) {
-    //   state.openSignUp = false;
-    // },
-    // setOpenProfile(state) {
-    //   state.openProfile = true;
-    // },
-    // resetOpenProfile(state) {
-    //   state.openProfile = false;
-    // },
     editNickname(state, action) {
       state.myprofile.nickName = action.payload;
     },
@@ -165,10 +147,6 @@ export const authSlice = createSlice({
 export const {
   fetchCredStart,
   fetchCredEnd,
-  // setOpenSignIn,
-  // resetOpenSignIn,
-  // setOpenSignUp,
-  // resetOpenSignUp,
   setLoggedIn,
   resetLoggedIn,
   setOpenProfile,
@@ -178,8 +156,6 @@ export const {
 
 export const selectIsLoadingAuth = (state) =>
   state.auth.isLoadingAuth;
-// export const selectOpenSignIn = (state) => state.auth.openSignIn;
-// export const selectOpenSignUp = (state) => state.auth.openSignUp;
 export const selectLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectOpenProfile = (state) => state.auth.openProfile;
 export const selectProfile = (state) => state.auth.myprofile;
