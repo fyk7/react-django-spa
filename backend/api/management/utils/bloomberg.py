@@ -1,13 +1,12 @@
 import re
 import time
 import requests
+from logging import getLogger
 from bs4 import BeautifulSoup
 BLOOMBERG_URL = "https://www.bloomberg.co.jp/"
+SLEEP_TIME = 0.5
 
-
-# class FinacialNews():
-#     def __init__(self, base_url):
-#         self.base_url = base_url
+logger = getLogger('django')
 
 
 def prep_text(text):
@@ -18,20 +17,33 @@ def prep_text(text):
     return text
 
 
+# TODO Add exception handling when css selectors no longer work.
 def fetch_news():
     target_url = BLOOMBERG_URL
-    news_list = []
-    res = requests.get(target_url)
-    soup = BeautifulSoup(res.text, 'html.parser')
+    try:
+        res = requests.get(target_url)
+        res.raise_for_status()
+    except Exception as e:
+        logger.error(e, stack_info=True, exc_info=True)
+    time.sleep(SLEEP_TIME)
 
-    for a in soup.select("#hub_story_list_2 div article div div.story-list-story__info__headline a"):
+    soup = BeautifulSoup(res.text, 'html.parser')
+    child_anchors = soup.select(
+        "#hub_story_list_2 div article div div.story-list-story__info__headline a")
+
+    news_list = []
+    for a in child_anchors:
         news_dict = {}
         news_dict['publisher'] = 1
         news_dict['title'] = a.text
-        child_url = target_url + a.get("href")
+        child_url = target_url + a["href"]
         news_dict['detail_url'] = child_url
-        res = requests.get(child_url)
-        time.sleep(0.5)
+        try:
+            res = requests.get(child_url)
+            res.raise_for_status()
+        except Exception as e:
+            logger.error(e, stack_info=True, exc_info=True)
+        time.sleep(SLEEP_TIME)
         soup = BeautifulSoup(res.text, 'html.parser')
         news_dict['detail'] = ''.join([prep_text(c.text) for c in soup.select(
             "article div.content-well section div.body-columns div p")])[:980] + '...'
