@@ -30,15 +30,14 @@ class Command(BaseCommand):
                         serializer.save()
                     except IntegrityError as e:
                         logger.warning(
-                            f"Already fetched article: {serializer.validated_data['title']}")
+                            f"Already fetched article is in database: {serializer.validated_data['title']}")
                         logger.warning(e, stack_info=True, exc_info=True)
                     except Exception as e:
-                        logger.error("Unknown error has occurred")
                         logger.error(e, stack_info=True, exc_info=True)
 
                 else:
                     logger.info(
-                        f"Skipped (Already fetched): {serializer.validated_data['title']}")
+                        f"Skipped (already fetched): {serializer.validated_data['title']}")
             else:
                 logger.error(
-                    "NewsSerializer's validation was failed.")
+                    "NewsSerializer's validation is failed.")
