@@ -11,6 +11,23 @@ ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 STATIC_ROOT = '/usr/share/nginx/html/static'
 MEDIA_ROOT = '/usr/share/nginx/html/media'
 
+# Amazon S3に関する設定
+# Static files
+# STATIC_URL = '/static/'
+# STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_STORAGE_BUKET_NAME =  # <任意のバケット(非公開)>
+# AWS_DEFAULT_ACL = None
+
+# Media files
+# MEDIA_URL = '/media/'
+
+# DEFAULT_FILE_STORAGE = 'config.storage_backends.S3MediaStorage'
+# MEDIA_AWS_STORAGE_BUCKET_NAME = 'mysite-media-storage'
+# MEDIA_AWS_DEFAULT_ACL = None
+
+
 # Amazon SES関連設定
 # AWS_SES_ACCESS_KEY_ID = os.environ.get('AWS_SES_ACCESS_KEY_ID')
 # AWS_SES_SECRET_ACCESS_KEY = os.environ.get('AWS_SES_SECRET_ACCESS_KEY')
