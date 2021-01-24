@@ -5,14 +5,14 @@ from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 from api.models import FinancialNews
 from api.serializers import NewsSerializer
-from ..utils import bloomberg  # , reuters
+from api.management.utils import bloomberg  # , reuters
 
 # settings_devの'django'ロガーを使用
 logger = getLogger('django')
 
 
 class Command(BaseCommand):
-    help = "Fetch financial news"
+    help = "Update financial news"
 
     def handle(self, *args, **options):
         recent_fetched_news = FinancialNews.objects.filter(
