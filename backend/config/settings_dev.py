@@ -18,8 +18,8 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'INFO',
         },
-        # diaryアプリケーションが利用するロガー
-        'diary': {
+        # apiアプリケーションが利用するロガー
+        'api': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },

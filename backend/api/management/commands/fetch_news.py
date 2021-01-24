@@ -1,10 +1,13 @@
 from datetime import datetime, timedelta
+from logging import getLogger
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
-from ...models import FinancialNews
-from ..news_utils import bloomberg  # , reuters
-ROEUTER_URL = "https://jp.reuters.com/"
+from api.models import FinancialNews
+from ..utils import bloomberg  # , reuters
+
+# settings_devの'django'ロガーを使用
+logger = getLogger('django')
 
 
 class Command(BaseCommand):
@@ -23,7 +26,8 @@ class Command(BaseCommand):
                 try:
                     financial_news.save()
                 except IntegrityError:
-                    print("Same article is already fetched")
+                    logger.info(
+                        f"Already fetched article: {financial_news.title}")
 
             else:
-                print("skipped")
+                logger.info(f"Skipped article: {financial_news.title}")
