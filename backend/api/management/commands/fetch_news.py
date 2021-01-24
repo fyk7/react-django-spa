@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 from api.models import FinancialNews
+from api.serializers import NewsSerializer
 from ..utils import bloomberg  # , reuters
 
 # settings_devの'django'ロガーを使用
@@ -17,17 +18,27 @@ class Command(BaseCommand):
         recent_fetched_news = FinancialNews.objects.filter(
             article_timestamp__gte=datetime.today() - timedelta(days=7))
         bloomberg_news = bloomberg.fetch_news()
+        # TODO Support for reuters news
         # reuters_news = reuters.fetch_news()
-        news = bloomberg_news  # + reuters_news
-        for n in news:
-            financial_news = FinancialNews(publisher=n['publisher'], title=n['title'], detail=n['detail'],
-                                           detail_url=n['detail_url'], article_timestamp=n['article_timestamp'])
-            if financial_news.title not in [news.title for news in recent_fetched_news]:
-                try:
-                    financial_news.save()
-                except IntegrityError:
-                    logger.info(
-                        f"Already fetched article: {financial_news.title}")
+        multiple_news = bloomberg_news  # + reuters_news
+        # TODO Investigating Serializer's "many=True" option can be used before iteration.
+        for news in multiple_news:
+            serializer = NewsSerializer(data=news)
+            if serializer.is_valid():
+                if serializer.validated_data['title'] not in [news.title for news in recent_fetched_news]:
+                    try:
+                        serializer.save()
+                    except IntegrityError as e:
+                        logger.warning(
+                            f"Already fetched article: {serializer.validated_data['title']}")
+                        logger.warning(e, stack_info=True, exc_info=True)
+                    except Exception as e:
+                        logger.error("Unknown error has occurred")
+                        logger.error(e, stack_info=True, exc_info=True)
 
+                else:
+                    logger.info(
+                        f"Skipped (Already fetched): {serializer.validated_data['title']}")
             else:
-                logger.info(f"Skipped article: {financial_news.title}")
+                logger.error(
+                    "NewsSerializer's validation was failed.")
