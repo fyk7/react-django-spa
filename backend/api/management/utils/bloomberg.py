@@ -4,7 +4,7 @@ import requests
 from logging import getLogger
 from bs4 import BeautifulSoup
 BLOOMBERG_URL = "https://www.bloomberg.co.jp/"
-SLEEP_TIME = 0.5
+TIME_SLEEP = 0.5
 
 logger = getLogger('django')
 
@@ -25,7 +25,7 @@ def fetch_news():
         res.raise_for_status()
     except Exception as e:
         logger.error(e, stack_info=True, exc_info=True)
-    time.sleep(SLEEP_TIME)
+    time.sleep(TIME_SLEEP)
 
     soup = BeautifulSoup(res.text, 'html.parser')
     child_anchors = soup.select(
@@ -43,10 +43,10 @@ def fetch_news():
             res.raise_for_status()
         except Exception as e:
             logger.error(e, stack_info=True, exc_info=True)
-        time.sleep(SLEEP_TIME)
+        time.sleep(TIME_SLEEP)
         soup = BeautifulSoup(res.text, 'html.parser')
         news_dict['detail'] = ''.join([prep_text(c.text) for c in soup.select(
-            "article div.content-well section div.body-columns div p")])[:980] + '...'
+            "article div.content-well section div.body-columns div p")])[:980]
         news_dict['article_timestamp'] = soup.select(
             "body > main > div.transporter-item.current > article > div.lede-text-only.lede > div > div > div > time")[0]["datetime"]
         news_list.append(news_dict)
