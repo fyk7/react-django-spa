@@ -7,7 +7,6 @@ from api.models import FinancialNews
 from api.serializers import NewsSerializer
 from api.management.utils import bloomberg  # , reuters
 
-# settings_devの'django'ロガーを使用
 logger = getLogger('django')
 
 
@@ -24,7 +23,7 @@ class Command(BaseCommand):
         # TODO Investigating Serializer's "many=True" option can be used before iteration.
         for news in multiple_news:
             serializer = NewsSerializer(data=news)
-            if serializer.is_valid():
+            if serializer.is_valid(raise_exception=True):
                 if serializer.validated_data['title'] not in [news.title for news in recent_fetched_news]:
                     try:
                         serializer.save()
@@ -38,6 +37,3 @@ class Command(BaseCommand):
                 else:
                     logger.info(
                         f"Skipped (already fetched): {serializer.validated_data['title']}")
-            else:
-                logger.error(
-                    "NewsSerializer's validation is failed.")
