@@ -14,8 +14,8 @@ class Command(BaseCommand):
     help = "Update financial news"
 
     def handle(self, *args, **options):
-        recent_fetched_news = FinancialNews.objects.filter(
-            article_timestamp__gte=datetime.today() - timedelta(days=7))
+        recent_news_titles = [news.title for news in FinancialNews.objects.filter(
+            article_timestamp__gte=datetime.today() - timedelta(days=7))]
         bloomberg_news = bloomberg.fetch_news()
         # TODO Support for reuters news
         # reuters_news = reuters.fetch_news()
@@ -24,7 +24,7 @@ class Command(BaseCommand):
         for news in multiple_news:
             serializer = NewsSerializer(data=news)
             if serializer.is_valid(raise_exception=True):
-                if serializer.validated_data['title'] not in [news.title for news in recent_fetched_news]:
+                if serializer.validated_data['title'] not in recent_news_titles:
                     try:
                         serializer.save()
                     except IntegrityError as e:
