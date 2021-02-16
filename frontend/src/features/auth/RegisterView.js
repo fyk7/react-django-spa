@@ -1,5 +1,4 @@
 import React from 'react';
-// import { AppDispatch } from "../../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -60,18 +59,12 @@ const RegisterView = () => {
           <Formik
             initialValues={{
               email: '',
-              firstName: '',
-              lastName: '',
-              password: '',
-              policy: false
+              password: ''
             }}
             validationSchema={
               Yup.object().shape({
                 email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-                // firstName: Yup.string().max(255).required('First name is required'),
-                // lastName: Yup.string().max(255).required('Last name is required'),
                 password: Yup.string().max(255).required('password is required'),
-                // policy: Yup.boolean().oneOf([true], 'This field must be checked')
               })
             }
             onSubmit={async (values) => {

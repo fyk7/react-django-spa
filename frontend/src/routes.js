@@ -15,7 +15,6 @@ const routes = (isLoggedin) => [
   {
     path: 'app',
     element: isLoggedin ? <DashboardLayout /> : <Navigate to="/login"/>,
-    // element: <DashboardLayout />,
     children: [
       { path: 'account', element: <AccountView /> },
       // { path: 'customers', element: <CustomerListView /> },
@@ -28,7 +27,6 @@ const routes = (isLoggedin) => [
   {
     path: '/',
     element: !isLoggedin ? <MainLayout /> : <Navigate to="/app/dashboard"/>,
-    // element: false ? <MainLayout /> : <Navigate to="/app/dashboard"/>,
     children: [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },

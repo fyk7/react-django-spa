@@ -11,8 +11,7 @@ import { selectLoggedIn } from './features/auth/authSlice';
 
 const App = () => {
   const isLoggedin = useSelector(selectLoggedIn);
-  // const { isLoggedin }  = useSelector(selectLoggedIn);
-  // TODO {}をつけるとsiLoggedinがundefinedとみなされる原因を調査
+  // const { isLoggedin }  = useSelector(selectLoggedIn); としない!!
   const routing = useRoutes(routes(isLoggedin));
 
   return (

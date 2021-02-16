@@ -5,10 +5,14 @@ import newsReducer from "../features/fianncialnews/financialnewsSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    // redux dev toolで stateの名称になるため非常に重要
     news: newsReducer,
   },
 });
+
+
+
+
+// For TypeScript
 
 // export type RootState = ReturnType<typeof store.getState>;
 // export type AppThunk<ReturnType = void> = ThunkAction<
