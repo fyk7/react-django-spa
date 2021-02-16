@@ -10,6 +10,7 @@ import {
   Link,
   TextField,
   Typography,
+  CircularProgress,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -50,6 +51,9 @@ const LoginView = () => {
         justifyContent="center"
       >
         <Container maxWidth="sm">
+          <div >
+            {isLoadingAuth && <CircularProgress />}
+          </div>
           <Formik
             initialValues={{
               email: '',
@@ -64,8 +68,7 @@ const LoginView = () => {
               const result = await dispatch(fetchAsyncLogin(values));
               if (fetchAsyncLogin.fulfilled.match(result)) {
                 await dispatch(fetchAsyncGetProfs());
-                // await dispatch(fetchAsyncGetPosts());
-                // await dispatch(fetchAsyncGetComments());
+                // await dispatch(fetchAsyncGetNews());
                 await dispatch(fetchAsyncGetMyProf());
                 await dispatch(setLoggedIn())
               }
